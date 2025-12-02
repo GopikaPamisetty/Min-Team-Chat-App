@@ -133,13 +133,17 @@ const ChannelChat = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.post(
+      const res = await axios.post(
         `${API}/api/messages/${id}`,
         { text: newMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+      
+      // Add instantly on sender UI
+      setMessages((prev) => [...prev, res.data.data]);
+      
       setNewMessage("");
+      
     } catch (err) {
       console.error("Send message error:", err);
     }

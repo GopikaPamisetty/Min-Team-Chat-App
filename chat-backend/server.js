@@ -19,15 +19,15 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
-// 🔥 SINGLE CORS CONFIG (DON’T REPEAT)
+// ✅ SINGLE CORS CONFIG
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://min-team-chat-app.vercel.app",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
@@ -35,9 +35,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Chat API running 🚀" });
 });
 
-// -------------------------
-// SOCKET.IO CORS
-// -------------------------
+// ---------------------------------------------------
+// ✅ SOCKET.IO CORS + INIT
+// ---------------------------------------------------
 const io = new Server(server, {
   cors: {
     origin: [
@@ -49,13 +49,18 @@ const io = new Server(server, {
   },
 });
 
-// 🟣 ONLINE USERS STORAGE
+// ⭐ VERY IMPORTANT — attach io so controllers can emit
+app.set("io", io);
+
+// ---------------------------------------------------
+// ⭐ ONLINE USERS
+// ---------------------------------------------------
 const onlineUsers = new Map(); // socket.id → { userId, name }
 
 io.on("connection", (socket) => {
   console.log("🟢 Client connected:", socket.id);
 
-  // USER CAME ONLINE
+  // USER ONLINE
   socket.on("userOnline", ({ userId, name }) => {
     onlineUsers.set(socket.id, { userId, name });
     io.emit("onlineUsers", Object.fromEntries(onlineUsers));
@@ -78,14 +83,14 @@ io.on("connection", (socket) => {
   });
 });
 
-// -------------------------
+// ---------------------------------------------------
 // ROUTES
-// -------------------------
+// ---------------------------------------------------
 app.use("/api/auth", authRoutes);
 app.use("/api/channels", channelRoutes);
 app.use("/api/messages", messageRoutes);
 
-// -------------------------
+// ---------------------------------------------------
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () =>
   console.log(`🚀 Server running on port ${PORT}`)
