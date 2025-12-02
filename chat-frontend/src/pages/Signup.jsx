@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_BASE_URL;
 function Signup() {
   const [form, setForm] = useState({
     name: "",
@@ -20,7 +20,7 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        `${API}/api/auth/signup`,
         form
       );
 

@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-
+const API = import.meta.env.VITE_API_BASE_URL;
 // FIX: create socket instance
 const socket = io("http://localhost:5000");
 

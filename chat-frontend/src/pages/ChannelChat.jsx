@@ -3,7 +3,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000", { transports: ["websocket"] });
+// ADD THIS LINE
+const API = import.meta.env.VITE_API_BASE_URL;
+
+// Replace old socket with this
+const socket = io(API, {
+  transports: ["websocket"],
+});
 
 const ChannelChat = () => {
   const { id } = useParams(); // channel ID
@@ -34,7 +40,7 @@ const ChannelChat = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        `http://localhost:5000/api/messages/${id}?page=${pageNumber}`,
+        `${API}/api/messages/${id}?page=${pageNumber}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -73,7 +79,7 @@ const ChannelChat = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get("http://localhost:5000/api/channels", {
+        const res = await axios.get(`${API}/api/channels`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -128,7 +134,7 @@ const ChannelChat = () => {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        `http://localhost:5000/api/messages/${id}`,
+        `${API}/api/messages/${id}`,
         { text: newMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );
