@@ -97,11 +97,20 @@ const ChannelChat = () => {
   useEffect(() => {
     socket.emit("joinChannel", id);
 
+    // socket.on("newMessage", (msg) => {
+    //   if (msg.channelId === id) {
+    //     setMessages((prev) => [...prev, msg]);
+    //   }
+    // });
     socket.on("newMessage", (msg) => {
-      if (msg.channelId === id) {
-        setMessages((prev) => [...prev, msg]);
-      }
+      if (msg.channelId !== id) return;
+    
+      // 🔥 Prevent duplicate message for the sender
+      if (msg.senderId?._id === userId) return;
+    
+      setMessages((prev) => [...prev, msg]);
     });
+    
 
     return () => {
       socket.emit("leaveChannel", id);
