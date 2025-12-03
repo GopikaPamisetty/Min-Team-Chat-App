@@ -9,7 +9,6 @@ const Channels = () => {
   const [confirmLeave, setConfirmLeave] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState("");
-
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
@@ -87,7 +86,7 @@ const Channels = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-       `${API}/api/channels`,
+        `${API}/api/channels`,
         { name: newChannelName },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 
 const API = import.meta.env.VITE_API_BASE_URL;
-
 const socket = io(API, {
   transports: ["websocket"],
 });
@@ -16,7 +15,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    console.log("🔴 Logging out...");
+    console.log(" Logging out...");
 
     localStorage.removeItem("token");
     localStorage.removeItem("userId");

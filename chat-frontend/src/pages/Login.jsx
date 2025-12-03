@@ -16,36 +16,36 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-  
+
     try {
       const res = await axios.post(`${API}/api/auth/login`, form);
-  
-      console.log("🟢 Login API Response:", res.data);
-  
+
+      console.log(" Login API Response:", res.data);
+
       const user = res.data.user;
-  
+
       // Save EVERYTHING
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", user.id);
 
       localStorage.setItem("name", user.name);
       localStorage.setItem("email", user.email);
-  
+
       console.log("💾 Saved to localStorage:", {
         token: res.data.token,
         userId: user._id,
         name: user.name,
         email: user.email,
       });
-  
+
       window.location.href = "/channels";
-  
+
     } catch (err) {
-      console.log("❌ Login error:", err);
+      console.log(" Login error:", err);
       setMessage(err.response?.data?.message || "Login failed");
     }
   };
-  
+
   return (
     <div style={styles.container}>
       <h2>Login</h2>

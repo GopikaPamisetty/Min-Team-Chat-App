@@ -1,25 +1,34 @@
-// controllers/channelController.js
 const Channel = require("../models/Channel");
 
-// exports.createChannel = async (req, res) => {
-//   try {
-//     const { name } = req.body;
 
-//     const exists = await Channel.findOne({ name });
-//     if (exists) {
-//       return res.status(400).json({ message: "Channel already exists" });
-//     }
+exports.createChannel = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const userId = req.userId;
 
-//     const channel = await Channel.create({
-//       name,
-//       members: [req.userId],
-//     });
+    if (!name || name.trim() === "") {
+      return res.status(400).json({ message: "Channel name is required" });
+    }
 
-//     res.status(201).json(channel);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+    const exists = await Channel.findOne({ name });
+    if (exists) {
+      return res.status(400).json({ message: "Channel already exists" });
+    }
+
+    const channel = await Channel.create({
+      name,
+      members: [userId],
+    });
+
+    res.status(201).json({
+      message: "Channel created successfully",
+      channel,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 exports.getAllChannels = async (req, res) => {
   try {
@@ -75,34 +84,3 @@ exports.leaveChannel = async (req, res) => {
   }
 };
 
-
-
-exports.createChannel = async (req, res) => {
-  try {
-    const { name } = req.body;
-    const userId = req.userId;
-
-    if (!name || name.trim() === "") {
-      return res.status(400).json({ message: "Channel name is required" });
-    }
-
-    // Check duplicate
-    const exists = await Channel.findOne({ name });
-    if (exists) {
-      return res.status(400).json({ message: "Channel already exists" });
-    }
-
-    const channel = await Channel.create({
-      name,
-      members: [userId],   // creator joins automatically
-    });
-
-    res.status(201).json({
-      message: "Channel created successfully",
-      channel,
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};

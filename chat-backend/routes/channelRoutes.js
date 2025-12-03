@@ -1,4 +1,3 @@
-// routes/channelRoutes.js
 const express = require("express");
 const router = express.Router();
 
@@ -9,9 +8,6 @@ const {
   leaveChannel,
   createChannel
 } = require("../controllers/channelController");
-
-
-
 
 router.post("/", auth, createChannel);
 router.get("/", auth, getAllChannels);

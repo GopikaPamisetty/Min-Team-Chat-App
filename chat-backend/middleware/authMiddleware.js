@@ -4,12 +4,9 @@ module.exports = (req, res, next) => {
   try {
     let token;
 
-    // Accept token from Authorization header
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
       token = req.headers.authorization.split(" ")[1];
     }
-
-    // OR accept token from cookies (optional)
     if (!token && req.cookies.token) {
       token = req.cookies.token;
     }
