@@ -1,6 +1,9 @@
 Mini Team Chat Application
 This project is a mini team chat application similar to Slack. It allows users to sign up, log in, join channels, send real-time messages, and see online users. The application includes both frontend and backend implementations.
 
+Live Links
+Frontend: https://min-team-chat-app.vercel.app
+Backend: https://min-team-chat-app.onrender.com
 1. Project Overview
 The purpose of this project is to build a real-time chat application where multiple users can interact inside channels. The application supports messaging, presence tracking, and pagination for older messages.
 This project fulfills the requirements of the Full-Stack Internship Assignment.
@@ -37,7 +40,15 @@ Frontend Interface
         ◦ Send messages
         ◦ See live online users
         ◦ Access authentication pages easily
-        
+Advanced Features
+    • Typing indicator shows when another user is typing  
+    • Search functionality inside each channel  
+    • Search result navigation with arrow buttons  
+    • Highlighted search matches  
+    • Message editing (only by sender, within 10 minutes)  
+    • Message deletion (replaced with “This message was deleted”)  
+    • Message delivery ✓ and seen ✓✓ indicators  
+
 3. Tech Stack
 Frontend
     • React.js
@@ -119,23 +130,25 @@ Some recommended platforms:
     • Backend: Render
     • Database: MongoDB Atlas
     
-10. Optional Features Not Implemented
-These are optional and can be added:
-    • Typing indicators
-    • Private channels
-    • Message editing or deletion
-    • Message search
+10. Optional Features Implemented (Bonus)
+    • Typing indicators  
+    • Message editing (within 10 minutes)  
+    • Message deletion (WhatsApp style "This message was deleted")  
+    • Message search with highlight  
+    • Search navigation using ↑ and ↓ like WhatsApp  
+    • Message delivered ✓ and seen ✓✓ indicators
     
 11. Assumptions
     • Only authenticated users can send and read messages.
     • Channel messages are public to all channel members.
     • Pagination returns 20 messages per page.
-    
-12. Limitations
-    • No file upload support.
-    • No private 
-    • UI is simple and minimal for assignment requirements.
-    
+
+12. Future Improvements
+    • Add private channels
+    • Add file sharing
+    • Add user roles (admin/moderator)
+    • Improve UI design
+
 13. Conclusion
 This project successfully meets all the mandatory requirements of the assignment:
     • Authentication
