@@ -91,7 +91,14 @@ const Channels = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      setChannels((prev) => [...prev, res.data.channel]);
+      setChannels((prev) => [
+        ...prev,
+        {
+          ...res.data.channel,
+          members: [{ _id: userId }], // mark creator as member in UI
+        },
+      ]);
+      
       setNewChannelName("");
       setShowModal(false);
     } catch (err) {
