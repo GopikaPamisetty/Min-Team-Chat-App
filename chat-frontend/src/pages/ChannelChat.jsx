@@ -467,15 +467,17 @@ const ChannelChat = () => {
                 <div className="mt-1 flex items-center justify-between gap-2">
                   {/* TIME + TICKS + EDITED */}
                   <div className="flex items-center gap-2">
-                    <p
-                      className={`text-xs ${mine ? "text-purple-200" : "text-gray-500"
-                        }`}
-                    >
-                      {new Date(msg.createdAt).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
+                  <p
+  className={`text-xs ${mine ? "text-purple-200" : "text-gray-500"}`}
+>
+  {new Date(msg.createdAt).toLocaleString([], {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })}
+</p>
 
                     {/* TICK ICONS (ONLY FOR MY MESSAGES) */}
                     {mine && (
