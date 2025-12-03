@@ -15,6 +15,7 @@ const channelSchema = new mongoose.Schema(
       }
     ]
   },
+  
   { timestamps: true }
 );
 
