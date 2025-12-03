@@ -1,6 +1,9 @@
 Mini Team Chat Application
 This project is a mini team chat application similar to Slack. It allows users to sign up, log in, join channels, send real-time messages, and see online users. The application includes both frontend and backend implementations.
 
+Live Links
+Frontend: https://min-team-chat-app.vercel.app
+Backend: https://min-team-chat-app.onrender.com
 1. Project Overview
 The purpose of this project is to build a real-time chat application where multiple users can interact inside channels. The application supports messaging, presence tracking, and pagination for older messages.
 This project fulfills the requirements of the Full-Stack Internship Assignment.
